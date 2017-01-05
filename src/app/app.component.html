@@ -1,3 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="#">Absainte CRM</a>
+
+  <form class="form-inline float-xs-right">
+    <button *ngIf="!isLoggedIn()" (click)="login()" class="btn btn-outline-success">Login</button>
+    <button *ngIf="isLoggedIn()" (click)="logout()" class="btn btn-outline-success">Logout</button>
+  </form>
+  
+</nav>
+<div class="container" style="margin-top: 50px;">
+  <h1>{{title}}</h1>
+  <div *ngIf="isLoggedIn()">
+    <p>email: {{user.email}}</p>
+    <p>name: {{user.name}}</p>
+  </div>
+</div>
