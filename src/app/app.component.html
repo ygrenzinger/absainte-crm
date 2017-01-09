@@ -1,5 +1,13 @@
 <nav class="navbar navbar-light bg-faded">
   <a class="navbar-brand" href="#">Absainte CRM</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/material">Material</a>
+    </li>
+  </ul>
 
   <form class="form-inline float-xs-right">
     <button *ngIf="!isLoggedIn()" (click)="login()" class="btn btn-outline-success">Login</button>
@@ -14,3 +22,6 @@
     <p>name: {{user.name}}</p>
   </div>
 </div>
+
+<template ngbModalContainer></template>
+<router-outlet></router-outlet>

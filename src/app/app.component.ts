@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AngularFire, AuthProviders } from 'angularfire2';
-import * as _ from "lodash";
 
 @Component({
   selector: 'app-root',
