@@ -1,0 +1,35 @@
+<div *ngIf="material" class="container">
+    <h1>Editing Material : {{material.name}}</h1>
+
+    <form #materialForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" required [(ngModel)]="material.name" name="name" #name="ngModel">
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                Name is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" required [(ngModel)]="material.price" name="price" #price="ngModel">
+            <div [hidden]="price.valid || price.pristine" class="alert alert-danger">
+                Price is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" required [(ngModel)]="material.quantity" name="quantity" #quantity="ngModel">
+            <div [hidden]="quantity.valid || quantity.pristine" class="alert alert-danger">
+                Quantity is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            unit cost : {{material.unitCost}}
+        </div>
+
+        <button type="button" class="btn btn-default" (click)="update()" [disabled]="!materialForm.form.valid">Save</button>
+    </form>
+</div>

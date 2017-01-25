@@ -11,9 +11,13 @@ import {
 } from "angularfire2";
 
 import { AppComponent } from './app.component';
+import { DeleteModalContent } from './delete-modal.component';
+import { NewMaterialComponent } from './material/new-material.component';
+import { MaterialEditComponent } from './material/material-edit.component';
 import { MaterialComponent } from './material/material.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './not-found.component';
+import { RessellerComponent } from './resseller/resseller.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCxzgEd7ecIVSILa51C2sXRTHbrmx5m9wc",
@@ -24,17 +28,18 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'material', component: MaterialComponent },
+  { path: 'material/new', component: NewMaterialComponent },
+  { path: 'material/:key', component: MaterialEditComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MaterialComponent,
-    HomeComponent,
-    PageNotFoundComponent
+    AppComponent, HomeComponent, PageNotFoundComponent, DeleteModalContent,
+    MaterialComponent, NewMaterialComponent, MaterialEditComponent,
+    RessellerComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ const appRoutes: Routes = [
     })
   ],
   providers: [],
+  entryComponents: [DeleteModalContent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
