@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { AngularFire, AuthProviders } from 'angularfire2';
+import { Component } from '@angular/core'
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app'
 
 @Component({
   selector: 'app-root',
@@ -7,36 +8,27 @@ import { AngularFire, AuthProviders } from 'angularfire2';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
-  user = null;
+  title = 'app works!'
+  user = null
 
   constructor(
-    public af: AngularFire
+    private afAuth: AngularFireAuth
   ) {
-    this.af.auth.subscribe(user => {
-      if(user) {
-        this.user = {
-            'email':user.google.email,
-            'name':user.google.displayName
-          };
-      }
-      else {
-        this.user = null;
-      }
-    });
+    afAuth.authState.subscribe(user => {
+      console.log(user)
+      this.user = user;
+    })
   }
 
   login() {
-    this.af.auth.login({
-      provider: AuthProviders.Google
-    });
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   logout() {
-    this.af.auth.logout();
+    this.afAuth.auth.signOut();
   }
 
   isLoggedIn() {
-    return this.user != null;
+    return this.user != null
   }
 }

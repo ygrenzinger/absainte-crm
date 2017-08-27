@@ -2,15 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { NgForm } from '@angular/forms'
 
 import { ActivatedRoute, Router } from '@angular/router'
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2'
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database'
 import { Subscription } from 'rxjs'
 
 import { Material } from './material'
-import { MaterialService } from './material.service'
+import { MaterialFirebase } from './material.firebase'
 
 @Component({
   selector: 'material-edit',
-  providers: [MaterialService],
+  providers: [MaterialFirebase],
   templateUrl: './material-edit.component.html',
   styleUrls: ['./material.component.css']
 })
@@ -20,7 +20,7 @@ export class MaterialEditComponent implements OnInit, OnDestroy {
   private material: Material
 
   constructor(
-    private materialService: MaterialService,
+    private materialService: MaterialFirebase,
     private router: Router,
     private route: ActivatedRoute
   ) { }

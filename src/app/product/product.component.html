@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Product</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Collection</th>
+                <th>Cost</th>
+                <th>Resseler Price</th>
+                <th>Customer Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{product.name}}</td>
+                <td>{{product.collectionName}}</td>
+                <td>{{product.resselerPrice}}€</td>
+                <td>{{product.customerPrice}}€</td>
+                <td>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="edit(product.key)"></i>
+                    <i class="fa fa-times" aria-hidden="true" (click)="deleteModal(product)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-lg btn-outline-primary" (click)="create()">New</button>
+</div>

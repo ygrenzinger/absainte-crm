@@ -11,14 +11,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let material of materials | async">
+            <tr *ngFor="let material of materials">
 
                 <td>{{material.name}}</td>
                 <td>{{material.price}}€</td>
                 <td>{{material.quantity}}</td>
                 <td>{{material.unitCost}}€</td>
                 <td>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="edit(material.$key)"></i>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="edit(material.key)"></i>
                     <i class="fa fa-times" aria-hidden="true" (click)="deleteModal(material)"></i>
                 </td>
             </tr>

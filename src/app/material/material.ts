@@ -1,11 +1,6 @@
-export interface MaterialJSON {
-  name:         string
-  quantity:     number
-  price:        number
-  unitCost:     number
-}
 
-export class Material implements MaterialJSON {
+export class Material {
+    private _key:       string
     private _name:      string
     private _quantity:  number
     private _price:     number
@@ -15,7 +10,8 @@ export class Material implements MaterialJSON {
         name: string,
         quantity: number,
         price: number,
-        unitCost?: number
+        unitCost?: number,
+        key?: string,
     ) {
         this._name = name
         this._quantity = quantity
@@ -25,10 +21,24 @@ export class Material implements MaterialJSON {
         } else {
             this._unitCost = unitCost
         }
+        this._key = key
     }
-    private computeUnitCost() {
+
+    private roundTo2Decimals(num: number): number {
+        return Math.round(num * 100) / 100
+    }
+
+    private computeUnitCost(): number {
         if (this._price < 1 || this._quantity < 1) return 0
-        return this._price / this._quantity
+        return this.roundTo2Decimals(this._price / this._quantity)
+    }
+
+    get key(): string {
+        return this._key
+    }
+
+    set key(key: string) {
+        this._key = key
     }
 
     get name(): string {
@@ -65,21 +75,22 @@ export class Material implements MaterialJSON {
         this._unitCost = unitCost
     }
 
-    toJSON(): MaterialJSON { 
+    toJSON() { 
         return {
             name:       this.name,
             quantity:   this.quantity,
             price:      this.price,
-            unitCost:   this.unitCost,
+            unitCost:   this.unitCost
         }
     }
 
-    static fromJSON(json: MaterialJSON) {
+    static fromJSON(json) {
         return new Material(
             json.name,
             json.quantity,
             json.price,
-            json.unitCost
+            json.unitCost,
+            json.$key
         )
     }
 

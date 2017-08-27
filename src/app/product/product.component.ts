@@ -7,30 +7,30 @@ import { Subscription } from 'rxjs'
 
 import { DeleteModalContent } from '../delete-modal.component'
 
-import { Material } from './material'
-import { MaterialFirebase }        from './material.firebase'
+import { Product } from './product'
+import { ProductFirebase }        from './product.firebase'
 
 @Component({
-  selector: 'material',
-  providers: [ MaterialFirebase ],
-  templateUrl: './material.component.html',
-  styleUrls: ['./material.component.css']
+  selector: 'product',
+  providers: [ ProductFirebase ],
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css']
 })
-export class MaterialComponent implements OnInit, OnDestroy {
+export class ProductComponent implements OnInit, OnDestroy {
   private subscription: Subscription
   closeResult: string
-  materialToBeDeleted: Material
-  materials: Material[]
+  productToBeDeleted: ProductFirebase
+  products: Product[]
 
   constructor(
-    private materialFirebase: MaterialFirebase,
+    private productFirebase: ProductFirebase,
     private router: Router,
     private modalService: NgbModal
   ) { }
 
   ngOnInit() {
-    this.subscription = this.materialFirebase.getMaterials().subscribe(materials=>{
-      this.materials = materials.map(material => Material.fromJSON(material))
+    this.subscription = this.productFirebase.getProducts().subscribe(products=>{
+      this.products = products.map(product => Product.fromJSON(product))
     })
   }
 
@@ -39,20 +39,20 @@ export class MaterialComponent implements OnInit, OnDestroy {
   }
 
   create() {
-    this.router.navigate(['/material/new'])
+    this.router.navigate(['/product/new'])
   }
 
   edit(key) {
-    this.router.navigate(['/material', key])
+    this.router.navigate(['/product', key])
   }
 
-  deleteModal(material: Material) {
+  deleteModal(product: Product) {
     const modalRef = this.modalService.open(DeleteModalContent)
-    modalRef.componentInstance.type = 'material'
-    modalRef.componentInstance.name = material.name
+    modalRef.componentInstance.type = 'product'
+    modalRef.componentInstance.name = product.name
     modalRef.result.then((result) => {
       if (result) {
-        this.materialFirebase.remove(material.key)
+        this.productFirebase.remove(product.key)
       }
     }, (_) => {})
   }

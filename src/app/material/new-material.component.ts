@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms'
 import { Router } from '@angular/router'
 
 import { Material } from './material'
-import { MaterialService } from './material.service'
+import { MaterialFirebase } from './material.firebase'
 
 @Component({
   selector: 'new-material',
-  providers: [ MaterialService ],
+  providers: [ MaterialFirebase ],
   templateUrl: './new-material.component.html',
   styleUrls: ['./material.component.css']
 })
@@ -16,7 +16,7 @@ export class NewMaterialComponent {
 
   constructor(
     private router: Router,
-    private materialService: MaterialService
+    private materialService: MaterialFirebase
   ) { }
 
   create() {
